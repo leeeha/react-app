@@ -5,12 +5,13 @@ import Content from "./components/Content"
 import './App.css';
 
 class App extends Component {
-  // render() º¸´Ù ¸ÕÀú ½ÇÇàµÇ¾î ÃÊ±âÈ­¸¦ ´ã´çÇÏ´Â »ı¼ºÀÚ 
+  // render() ë³´ë‹¤ ë¨¼ì € ì‹¤í–‰ë˜ì–´ ì´ˆê¸°í™”ë¥¼ ë‹´ë‹¹í•˜ëŠ” ìƒì„±ì 
   constructor(props){
+    // ë¶€ëª¨ í´ë˜ìŠ¤ì˜ ìƒì„±ìë¥¼ ë¨¼ì € í˜¸ì¶œí•´ì£¼ì§€ ì•Šìœ¼ë©´, thisì— ì ‘ê·¼ ë¶ˆê°€! 
     super(props);
     this.state = {
       subject:{title:'WEB', sub:'World Wide Web!'}, 
-      // ¼Ó¼ºÀÌ °¡Áø µ¥ÀÌÅÍ°¡ ¿©·¯ °³ÀÏ ¶§´Â ¹è¿­ »ç¿ë
+      // ì†ì„±ì´ ê°€ì§„ ë°ì´í„°ê°€ ì—¬ëŸ¬ ê°œì¼ ë•ŒëŠ” ë°°ì—´ ì‚¬ìš©
       contents:[
         {id:1, title:'HTML', desc:'HTML is for information'},
         {id:2, title:'CSS', desc:'CSS is for design'},
@@ -23,13 +24,13 @@ class App extends Component {
     return (
       <div className="App">
          <Subject
-            // propsÀÇ µ¥ÀÌÅÍ¸¦ state¿¡¼­ °¡Á®¿È. 
+            // propsì˜ ë°ì´í„°ë¥¼ stateì—ì„œ ê°€ì ¸ì˜´. 
             title={this.state.subject.title}
             sub={this.state.subject.sub}>
           </Subject>
 
           <TOC 
-            // contents¿¡ ´ã±ä ¹è¿­ Á¤º¸¸¦ TOC ÄÄÆ÷³ÍÆ®¿¡ ÁÖÀÔÇÏ±â 
+            // contentsì— ë‹´ê¸´ ë°°ì—´ ì •ë³´ë¥¼ TOC ì»´í¬ë„ŒíŠ¸ì— ì£¼ì…í•˜ê¸° 
             data={this.state.contents}>
           </TOC>
 
