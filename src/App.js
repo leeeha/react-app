@@ -31,27 +31,16 @@ class App extends Component {
 
     return (
       <div className="App">
-         {/* <Subject
+         <Subject
             title={this.state.subject.title}
-            sub={this.state.subject.sub}>
-          </Subject> */}
-          <header>
-            <h1><a href="/" onClick={function(e){
-              console.log(e);
-              // 링크를 클릭할 때마다 앱이 리로드 되는 것을 막기 위해 호출하는 함수  
-              e.preventDefault(); 
+            sub={this.state.subject.sub}
 
-              // Uncaught TypeError: Cannot read properties of undefined (reading 'state')
-              //this.state.mode = 'welcome'; // 이렇게 하면 렌더링 불가 (생성자에서는 가능)
-              this.setState({ // 동적으로 렌더링하고 싶을 때는 setState를 사용해야 리액트가 상태 변화를 알아차림. 
-                mode:'welcome'
-              });
-
-              // bind(this)에 의해 render 함수 안에서 사용되는 this는 
-              // App 컴포넌트 자체를 가리키게 됨. 
-            }.bind(this)}>{this.state.subject.title}</a></h1>
-            {this.state.subject.sub}
-          </header>
+            // 이벤트 생성 
+            onChangePage={function(){
+              this.setState({mode:'welcome'});
+            }.bind(this)} 
+          >
+          </Subject>
           <TOC data={this.state.contents}></TOC>
           <Content title={_title} desc={_desc}></Content>
       </div>
