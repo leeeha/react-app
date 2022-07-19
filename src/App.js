@@ -5,13 +5,12 @@ import Content from "./components/Content"
 import './App.css';
 
 class App extends Component {
-  // render() 보다 먼저 실행되어 초기화를 담당하는 생성자 
   constructor(props){
-    // 부모 클래스의 생성자를 먼저 호출해주지 않으면, this에 접근 불가! 
     super(props);
     this.state = {
-      subject:{title:'WEB', sub:'World Wide Web!'}, 
-      // 속성이 가진 데이터가 여러 개일 때는 배열 사용
+      mode:'read',
+      subject:{title:'WEB', sub:'World Wide Web!'},
+      welcome:{title:'Welcome', desc:'Hello, React!!'},
       contents:[
         {id:1, title:'HTML', desc:'HTML is for information'},
         {id:2, title:'CSS', desc:'CSS is for design'},
@@ -21,20 +20,40 @@ class App extends Component {
   }
 
   render(){
+    var _title, _desc = null;
+    if(this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    }else if(this.state.mode === 'read'){
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+    }
+
     return (
       <div className="App">
-         <Subject
-            // props의 데이터를 state에서 가져옴. 
+         {/* <Subject
             title={this.state.subject.title}
             sub={this.state.subject.sub}>
-          </Subject>
+          </Subject> */}
+          <header>
+            <h1><a href="/" onClick={function(e){
+              console.log(e);
+              // 링크를 클릭할 때마다 앱이 리로드 되는 것을 막기 위해 호출하는 함수  
+              e.preventDefault(); 
 
-          <TOC 
-            // contents에 담긴 배열 정보를 TOC 컴포넌트에 주입하기 
-            data={this.state.contents}>
-          </TOC>
+              // Uncaught TypeError: Cannot read properties of undefined (reading 'state')
+              //this.state.mode = 'welcome'; // 이렇게 하면 렌더링 불가 (생성자에서는 가능)
+              this.setState({ // 동적으로 렌더링하고 싶을 때는 setState를 사용해야 리액트가 상태 변화를 알아차림. 
+                mode:'welcome'
+              });
 
-         <Content title="HTML" desc="HTML is HyperText Markup Language."></Content>
+              // bind(this)에 의해 render 함수 안에서 사용되는 this는 
+              // App 컴포넌트 자체를 가리키게 됨. 
+            }.bind(this)}>{this.state.subject.title}</a></h1>
+            {this.state.subject.sub}
+          </header>
+          <TOC data={this.state.contents}></TOC>
+          <Content title={_title} desc={_desc}></Content>
       </div>
     );
   }
