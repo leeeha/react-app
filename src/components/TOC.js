@@ -6,9 +6,17 @@ class TOC extends Component {
         var data = this.props.data;
         var i = 0;
         while(i < data.length){
-            // 여러 항목을 자동으로 생성할 때는, 각 항목이 key 값을 가져야 한다. 
-            lists.push(<li key={data[i].id}><a href={"/content/"+data[i].id}>{data[i].title}</a>
-            </li>)
+            lists.push(
+            <li key={data[i].id}>
+                <a 
+                    href={"/content/"+data[i].id} 
+                    data-id={data[i].id} 
+                    onClick={function(e){
+                        e.preventDefault();
+                        this.props.onChangePage(e.target.dataset.id);
+                    }.bind(this)}
+                >{data[i].title}</a>
+            </li>);
             i++;
         }
 
