@@ -49,12 +49,13 @@ class App extends Component {
             >
           </Subject>
           <TOC 
-            // TOC.js의 render() 함수에서 onChangePage 함수를 실행시킴. 
-            onChangePage={function(id){
+            // 하위 컴포넌트에서 전달받은 id 값에 따라
+            // 상위 컴포넌트의 상태 변경 
+            onChangePage={function(id){ 
               this.setState({
                 mode:'read',
                 selected_content_id:Number(id) // 문자열에서 숫자 타입으로 변환 필수
-              }); 
+              });
             }.bind(this)}
             data={this.state.contents}>
           </TOC>
