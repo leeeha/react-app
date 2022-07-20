@@ -56,13 +56,20 @@ class App extends Component {
         // );
 
         // concat은 변경된 배열의 복사본을 리턴 (성능에 더 유리) 
-        var _contents = this.state.contents.concat( 
+        // var _contents = this.state.contents.concat( 
+        //   {id:this.max_content_id, title:_title, desc:_desc}
+        // )
+
+        // Array.from()으로 새로운 배열 생성하기 
+        // cf) 객체를 복사할 때는 Object.assign({}, originArray) 
+        var newContents = Array.from(this.state.contents); 
+        newContents.push(
           {id:this.max_content_id, title:_title, desc:_desc}
-        )
+        );
 
         // 리액트가 상태 변화를 알아듣도록!  
         this.setState({
-          contents:_contents
+          contents:newContents
         })
 
         console.log(_title, _desc); 

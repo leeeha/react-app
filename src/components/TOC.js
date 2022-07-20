@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
 class TOC extends Component {
-    // props³ª state¿¡ µû¶ó ÄÄÆ÷³ÍÆ®ÀÇ ·»´õ¸µ ¿©ºÎ¸¦ °áÁ¤ÇÒ ¼ö ÀÖÀ½. (¼º´É °³¼±)
+    // propsë‚˜ state ë³€í™”ì— ë”°ë¼ ì»´í¬ë„ŒíŠ¸ì˜ ë Œë”ë§ ì—¬ë¶€ë¥¼ ê²°ì •í•  ìˆ˜ ìˆìŒ. (ì„±ëŠ¥ ê°œì„ )
     shouldComponentUpdate(newProps, newState){
         console.log('===> TOC render shouldComponentUpdate'
         ,newProps.data
         ,this.props.data
         );
 
-        // TOC µ¥ÀÌÅÍ°¡ ±×´ë·Î¸é, render ÇÔ¼ö¸¦ È£ÃâÇÏÁö ¾Êµµ·Ï! 
+        // TOC ë°ì´í„°ê°€ ê·¸ëŒ€ë¡œë©´, render í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ì§€ ì•Šë„ë¡! 
+        // App ì»´í¬ë„ŒíŠ¸ì—ì„œ push í•¨ìˆ˜ë¥¼ ì¨ë²„ë¦¬ë©´ ì›ë³¸ ìì²´ê°€ ë³€í•˜ë‹ˆê¹Œ ì¡°ê±´ë¬¸ì´ í•­ìƒ true 
         if(this.props.data === newProps.data){
             return false;
         }
@@ -16,7 +17,7 @@ class TOC extends Component {
         return true;
     }
 
-    // TOC »óÅÂ°¡ ¹Ù²îÁö ¾ÊÀ» ¶§´Â ÀÌ ÇÔ¼ö°¡ È£ÃâµÇÁö ¾Ê¾ÒÀ¸¸é ÁÁ°Ú¾î! 
+    // TOC ìƒíƒœê°€ ë°”ë€Œì§€ ì•Šì„ ë•ŒëŠ” ì´ í•¨ìˆ˜ê°€ í˜¸ì¶œë˜ì§€ ì•Šì•˜ìœ¼ë©´ ì¢‹ê² ì–´! 
     render(){
         console.log('TOC render');
         var lists = [];
