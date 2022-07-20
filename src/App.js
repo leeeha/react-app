@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TOC from "./components/TOC"
 import Subject from "./components/Subject"
 import Content from "./components/Content"
+import Control from "./components/Control"
 import './App.css';
 
 class App extends Component {
@@ -43,22 +44,32 @@ class App extends Component {
          <Subject
             title={this.state.subject.title}
             sub={this.state.subject.sub}
+
+            // WEB을 클릭하면 welcome 모드가 되도록 
             onChangePage={function(){
               this.setState({mode:'welcome'});
-            }.bind(this)} 
-            >
-          </Subject>
+            }.bind(this)}></Subject>
+
           <TOC 
-            // 하위 컴포넌트에서 전달받은 id 값에 따라
-            // 상위 컴포넌트의 상태 변경 
+            data={this.state.contents}
+
+            // 각 항목을 클릭하면 read 모드로 바뀌고, 
+            // id에 따라 아래의 Content가 바뀌도록 
             onChangePage={function(id){ 
               this.setState({
                 mode:'read',
-                selected_content_id:Number(id) // 문자열에서 숫자 타입으로 변환 필수
+                selected_content_id:Number(id)
               });
-            }.bind(this)}
-            data={this.state.contents}>
-          </TOC>
+            }.bind(this)}></TOC>
+
+          <Control 
+            // CRUD 모드 선택 
+            onChangeMode={function(_mode){
+              this.setState({
+                mode:_mode
+              })
+            }.bind(this)}></Control>
+
           <Content title={_title} desc={_desc}></Content>
       </div>
     );
