@@ -4,11 +4,10 @@ class UpdateContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id:this.props.data.id,
       title: this.props.data.title,
       desc: this.props.data.desc
     }
-
-    // 중복되는 코드 제거하기 
     this.inputFormHandler = this.inputFormHandler.bind(this);    
   }
 
@@ -27,15 +26,23 @@ class UpdateContent extends Component {
     return (
       <article>
         <h2>Update</h2>
+
         <form action="/create_process" method="post"
           onSubmit={function (e) {
             e.preventDefault();
             this.props.onSubmit(
-              e.target.title.value,
-              e.target.desc.value
+              this.state.id,
+              this.state.title,
+              this.state.desc
             );
           }.bind(this)}
         >
+          <input 
+            // 사용자에게 보일 필요가 없는 정보는 hidden form으로 작성 
+            type="hidden" 
+            name="id" // 어디를 업데이트 할지 알려면 식별자 필요  
+            value={this.state.id}>
+          </input>
           <p>
             <input
               type="text"
