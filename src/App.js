@@ -96,6 +96,30 @@ class App extends Component {
     return _article;
   }
 
+  deleteSelectedContent(){
+    if(window.confirm('really?')){
+      // 새로운 배열을 만들어서 
+      var _contents = Array.from(this.state.contents);
+
+      // 그 배열의 selected_content_id에 해당하는 항목 삭제하기 
+      var i = 0; 
+      while(i < _contents.length){
+        if(_contents[i].id === this.state.selected_content_id){
+          _contents.splice(i, 1); // i에서부터 1개 삭제 
+          break; 
+        }
+        i++;
+      }
+
+      this.setState({ 
+        mode:'welcome', 
+        contents:_contents 
+      })
+
+      alert('deleted!');
+    }
+  }
+
   render() {
     console.log('App render');
     return (
@@ -125,9 +149,13 @@ class App extends Component {
         <Control
           // CRUD 모드 선택 
           onChangeMode={function (_mode) {
-            this.setState({
-              mode: _mode
-            })
+            if(_mode === 'delete'){
+              this.deleteSelectedContent();
+            }else{
+              this.setState({
+                mode: _mode
+              })
+            }
           }.bind(this)}></Control>
 
         { // 현재 모드에 해당하는 컴포넌트가 리턴됨. 
